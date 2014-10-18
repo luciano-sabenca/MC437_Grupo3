@@ -1,39 +1,49 @@
 package stories;
-import org.jbehave.core.annotations.*;
-public class Upload_Scenario{
+
+import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class Upload_Scenario {
+
+	WebDriver driver = new FirefoxDriver();
+
 	@Then("o arquivo e processado e armazenado no banco de dados")
-	@Pending
-	public void thenOArquivoEProcessadoEArmazenadoNoBancoDeDados(){
-		 //TODO 
+	public void thenOArquivoEProcessadoEArmazenadoNoBancoDeDados() {
+		// TODO
+		driver.get("http://localhost:8080");
+		System.out.println("bla");
 	}
+
 	@Then("aparece a mensagem Upload realizado com sucesso")
-	@Pending
-	public void thenApareceAMensagemUploadRealizadoComSucesso(){
-		 //TODO 
+	public void thenApareceAMensagemUploadRealizadoComSucesso() {
+		// TODO
 	}
+
 	@Given("o caminho de um arquivo xml <caminho_xml>")
-	@Pending
-	public void givenOCaminhoDeUmArquivoXmlcaminho_xml(){
-		 //TODO 
+	public void givenOCaminhoDeUmArquivoXmlcaminho_xml() {
+		// TODO
 	}
+
 	@Then("o arquivo passa a ser listado na lista de arquivos")
-	@Pending
-	public void thenOArquivoPassaASerListadoNaListaDeArquivos(){
-		 //TODO 
+	public void thenOArquivoPassaASerListadoNaListaDeArquivos() {
+		// TODO
 	}
+
 	@When("ha memoria disponivel no banco de dados")
-	@Pending
-	public void whenHaMemoriaDisponivelNoBancoDeDados(){
-		 //TODO 
+	public void whenHaMemoriaDisponivelNoBancoDeDados() {
+		// TODO
 	}
+
 	@When("o usuario clica no botao de upload")
-	@Pending
-	public void whenOUsuarioClicaNoBotaoDeUpload(){
-		 //TODO 
+	public void whenOUsuarioClicaNoBotaoDeUpload() {
+		// TODO
 	}
+
 	@When("o xml e valido")
-	@Pending
-	public void whenOXmlEValido(){
-		 //TODO 
+	public void whenOXmlEValido() {
+		// TODO
 	}
 }

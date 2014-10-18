@@ -3,6 +3,8 @@ package mc437.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Random;
+import java.util.UUID;
 
 import mc437.bean.Teste;
 import mc437.dao.TesteDAO;
@@ -56,8 +58,8 @@ public class TestController {
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String handleFileUpload(@RequestParam("name") String name,
-			@RequestParam("file") MultipartFile file) {
+	public String handleFileUpload(@RequestParam("file") MultipartFile file) {
+		String name = file.getName();
 		if (!file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
