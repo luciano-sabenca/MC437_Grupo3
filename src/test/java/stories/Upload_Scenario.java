@@ -1,4 +1,4 @@
-package story1;
+package stories;
 import org.jbehave.core.annotations.*;
 public class Upload_Scenario{
 	@Then("o arquivo e processado e armazenado no banco de dados")
