@@ -5,5 +5,18 @@
 		<input type="submit" value="Upload"> Press here to upload the
 		file!
 	</form>
+	
+	<table>
+		<tr>
+			<th>Nome</th>
+			<th>Tamanho</th>
+			<th>Data</th>
+		</tr>
+		<tr>
+			<td><p th:text="'Hello, ' + ${name} + '!'" /></td>
+			<td><p th:text="'Eu gosto de banana ' + ${type} + '!'" /></td>
+			<td>-</td>
+		</tr>
+	</table> 
 </body>
 </html>

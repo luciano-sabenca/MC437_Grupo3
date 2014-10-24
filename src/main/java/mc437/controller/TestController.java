@@ -40,6 +40,17 @@ public class TestController {
 		testeDAO.bla();
 		return "greeting";
 	}
+	
+	@RequestMapping("/")
+	public String xml_files(
+			@RequestParam(value = "name", required = false, defaultValue = "World") String name,
+			@RequestParam(value = "type", required = false, defaultValue = "prata") String banana,
+			Model model) {
+		model.addAttribute("type", banana);
+		model.addAttribute("name", name);
+
+		return "banana";
+	}
 
 	@RequestMapping("/banana")
 	public String banana(

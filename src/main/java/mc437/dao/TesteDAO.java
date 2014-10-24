@@ -13,6 +13,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import entities.XMLFile;
+
 @Repository
 public class TesteDAO {
 
@@ -28,6 +30,19 @@ public class TesteDAO {
 							.queryForInt("SELECT id FROM Teste WHERE texto = 'banana'"));
 
 		}
+	}
+	
+	public List<XMLFile> getFiles(){
+		JdbcTemplate template = new JdbcTemplate(datasource);
+		return template.query("SELECT * FROM I_Test_Result", new RowMapper<XMLFile>() {
+
+			@Override
+			public XMLFile mapRow(ResultSet rs, int rowNum) throws SQLException {
+				XMLFile xml = new XMLFile(rs.getString("file_name"), rs.getInt("file_size"), rs.getDate("date"));
+				return xml;
+			}
+
+		});
 	}
 
 	public List<Teste> getAllTests() {
