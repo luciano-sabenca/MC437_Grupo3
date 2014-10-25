@@ -1,11 +1,45 @@
 <html>
+
+<head>
+
+<link rel="stylesheet" type="text/css"
+	href="/bootstrap-3.2.0-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css">
+
+<link rel="stylesheet"
+	href="/bootstrap-3.2.0-dist/fonts/glyphicons-halflings-regular.eot">
+<link
+	href="/bootstrap-3.2.0-dist/fonts/glyphicons-halflings-regular.svg">
+<link
+	href="/bootstrap-3.2.0-dist/fonts/glyphicons-halflings-regular.ttf">
+<link
+	href="/bootstrap-3.2.0-dist/fonts/glyphicons-halflings-regular.woff">
+
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"
+	src="/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+
+
+</head>
+
+
 <body>
-	<form method="POST" enctype="multipart/form-data" action="/upload">
-		File to upload: <input type="file" name="file"><br /> <br />
-		<input type="submit" value="Upload"> Press here to upload the
-		file!
-	</form>
+	<div class="container">
 	
+	<form method="POST" enctype="multipart/form-data" class="form-group"
+			action="/upload">
+			<div class="form-group">
+				<label for="file">File to Submit</label> <input class="form-control"
+					type="file" name="file"><br />
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-default" value="Upload">
+				Press here to upload the file!
+			</div>
+		</form>
+
+
 	<table>
 		<tr>
 			<th>Nome</th>
@@ -18,5 +52,7 @@
 			<td>-</td>
 		</tr>
 	</table> 
+
+	</div>
 </body>
 </html>

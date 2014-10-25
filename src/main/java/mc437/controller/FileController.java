@@ -3,8 +3,6 @@ package mc437.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Random;
-import java.util.UUID;
 
 import mc437.bean.Teste;
 import mc437.dao.TesteDAO;
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-public class TestController {
+public class FileController {
 
 	@Autowired
 	TesteInterface testeService;
@@ -70,16 +68,16 @@ public class TestController {
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String handleFileUpload(@RequestParam("file") MultipartFile file) {
-		String name = file.getName();
+		String name = file.getOriginalFilename();
 		if (!file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
 				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File(name + "-uploaded")));
+						new FileOutputStream(new File("files/" + name
+								+ "-uploaded")));
 				stream.write(bytes);
 				stream.close();
-				return "You successfully uploaded " + name + " into " + name
-						+ "-uploaded !";
+				return "fileUploaded";
 			} catch (Exception e) {
 				return "You failed to upload " + name + " => " + e.getMessage();
 			}
