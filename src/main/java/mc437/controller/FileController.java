@@ -3,11 +3,16 @@ package mc437.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 import mc437.bean.Teste;
+import mc437.bean.XMLFile;
 import mc437.dao.TesteDAO;
 import mc437.service.TesteInterface;
 
+import org.apache.commons.collections.map.AbstractHashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.common.collect.Maps;
 
 @Controller
 public class FileController {
@@ -38,16 +45,18 @@ public class FileController {
 		testeDAO.bla();
 		return "greeting";
 	}
-	
+
 	@RequestMapping("/")
 	public String xml_files(
 			@RequestParam(value = "name", required = false, defaultValue = "World") String name,
 			@RequestParam(value = "type", required = false, defaultValue = "prata") String banana,
 			Model model) {
-		model.addAttribute("type", banana);
-		model.addAttribute("name", name);
 
-		return "banana";
+		List<XMLFile> testes = testeDAO.getFiles();
+
+		model.addAttribute("valores", testes);
+
+		return "index";
 	}
 
 	@RequestMapping("/banana")

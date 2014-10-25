@@ -2,18 +2,18 @@ package mc437.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import mc437.bean.Teste;
+import mc437.bean.XMLFile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
-import entities.XMLFile;
 
 @Repository
 public class TesteDAO {
@@ -31,18 +31,21 @@ public class TesteDAO {
 
 		}
 	}
-	
-	public List<XMLFile> getFiles(){
+
+	public List<XMLFile> getFiles() {
 		JdbcTemplate template = new JdbcTemplate(datasource);
-		return template.query("SELECT * FROM I_Test_Result", new RowMapper<XMLFile>() {
+		return template.query("SELECT * FROM I_Test_Result",
+				new RowMapper<XMLFile>() {
 
-			@Override
-			public XMLFile mapRow(ResultSet rs, int rowNum) throws SQLException {
-				XMLFile xml = new XMLFile(rs.getString("file_name"), rs.getInt("file_size"), rs.getDate("date"));
-				return xml;
-			}
+					@Override
+					public XMLFile mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						XMLFile xml = new XMLFile(rs.getString("file_name"), rs
+								.getInt("file_size"), new Date());
+						return xml;
+					}
 
-		});
+				});
 	}
 
 	public List<Teste> getAllTests() {

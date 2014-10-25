@@ -2,14 +2,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
- 
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
- 
+
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://sql2.lab.ic.unicamp.br:3306/mc536db25" />
-		<property name="username" value="mc536user25" />
-		<property name="password" value="uiphohre" />
+		<property name="url"
+			value="jdbc:mysql://sql2.lab.ic.unicamp.br:3306/dbmc437grp3" />
+		<property name="username" value="umc437grp3" />
+		<property name="password" value="wikophoo" />
 	</bean>
- 
+
 </beans>
