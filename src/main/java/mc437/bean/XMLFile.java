@@ -4,10 +4,14 @@ import java.util.Date;
 
 public class XMLFile {
 	private String nome;
-	private Integer tamanho;
+	private Long tamanho;
 	private Date dataEnvio;
 
-	public XMLFile(String nome, Integer tamanho, Date dataEnvio) {
+	public XMLFile() {
+
+	}
+
+	public XMLFile(String nome, Long tamanho, Date dataEnvio) {
 		this.nome = nome;
 		this.tamanho = tamanho;
 		this.dataEnvio = dataEnvio;
@@ -21,11 +25,11 @@ public class XMLFile {
 		this.nome = nome;
 	}
 
-	public Integer getTamanho() {
+	public Long getTamanho() {
 		return tamanho;
 	}
 
-	public void setTamanho(Integer tamanho) {
+	public void setTamanho(Long tamanho) {
 		this.tamanho = tamanho;
 	}
 

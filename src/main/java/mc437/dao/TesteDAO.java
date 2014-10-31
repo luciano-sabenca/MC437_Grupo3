@@ -2,6 +2,7 @@ package mc437.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Date;
 import java.util.List;
 
@@ -41,11 +42,21 @@ public class TesteDAO {
 					public XMLFile mapRow(ResultSet rs, int rowNum)
 							throws SQLException {
 						XMLFile xml = new XMLFile(rs.getString("file_name"), rs
-								.getInt("file_size"), new Date());
+								.getLong("file_size"), new Date(rs
+								.getTimestamp("date").getTime()));
 						return xml;
 					}
 
 				});
+	}
+
+	public void saveFile(XMLFile file) {
+		JdbcTemplate template = new JdbcTemplate(datasource);
+		template.update(
+				"INSERT INTO I_Test_Result(date,file_size,file_name) VALUES (?, ?, ?)",
+				new Object[] { file.getDataEnvio(), file.getTamanho(),
+						file.getNome() }, new int[] { Types.DATE,
+						Types.INTEGER, Types.VARCHAR });
 	}
 
 	public List<Teste> getAllTests() {
