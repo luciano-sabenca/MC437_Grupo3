@@ -57,6 +57,7 @@ public class FileController {
 		model.addAttribute("valores", testes);
 
 		return "index";
+		
 	}
 
 	@RequestMapping("/banana")

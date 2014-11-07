@@ -77,7 +77,8 @@ public class JBehaveConfiguration extends JUnitStories {
 
 	@Override
 	public InjectableStepsFactory stepsFactory() {
-		return new InstanceStepsFactory(configuration(), new Listagem_1_Arquivo());
+		return new InstanceStepsFactory(configuration(),
+				new Listagem_0_Arquivos());
 	}
 
 	@Override
