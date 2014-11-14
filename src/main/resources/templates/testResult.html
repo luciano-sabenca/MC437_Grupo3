@@ -22,6 +22,41 @@
 	src="/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 
 
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script th:inline="javascript">
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Estado Mutante');
+        data.addColumn('number', 'Contagem');
+        data.addRows([
+          ['Vivo', /*[[${notDeadMutantsQtd}]]]*/,
+          ['Morto', /*[[${deadMutantsQtd}]]]*/]
+        ]);
+
+        // Set chart options
+        var options = {'title':'Mutantes Vivos x Mutantes Mortos',
+                       'width':400,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
 </head>
 
 
@@ -37,20 +72,25 @@
 
 			<div class="panel-body">
 
-				<dl class="dl-horizontal">
-					<dt>Id</dt>
-					<dd th:text="${id}"></dd>
-
-					<dt>Total</dt>
-					<dd th:text="${totalMutants}"></dd>
-
-					<dt>Dead Mutants</dt>
-					<dd th:text="${deadMutantsQtd}"></dd>
-
-					<dt>Not Dead Mutants</dt>
-					<dd th:text="${notDeadMutantsQtd}"></dd>
-
-				</dl>
+				<div class="container" style="float:left;width:40%;">
+					<dl class="dl-horizontal">
+						<dt>Id</dt>
+						<dd th:text="${id}"></dd>
+	
+						<dt>Total</dt>
+						<dd th:text="${totalMutants}"></dd>
+	
+						<dt>Dead Mutants</dt>
+						<dd th:text="${deadMutantsQtd}"></dd>
+	
+						<dt>Not Dead Mutants</dt>
+						<dd th:text="${notDeadMutantsQtd}"></dd>
+	
+					</dl>
+				</div>
+				<div class="container" style="float:right;width:60%;">
+					<div id="chart_div"></div>
+				</div>
 
 				<h1>Dead Mutants</h1>
 
