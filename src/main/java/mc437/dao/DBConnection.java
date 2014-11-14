@@ -5,8 +5,8 @@ import javax.sql.DataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class DBConnection {
@@ -22,5 +22,10 @@ public class DBConnection {
 		// return dataSource;
 
 		return (DataSource) context.getBean("dataSource");
+	}
+
+	@Bean
+	public JdbcTemplate getTemplate() {
+		return new JdbcTemplate(getDatasource());
 	}
 }

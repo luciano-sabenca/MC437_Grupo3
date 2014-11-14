@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<link rel="stylesheet" type="text/css"
+	href="/bootstrap-3.2.0-dist/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"></link>
+
+<link rel="stylesheet"
+	href="/bootstrap-3.2.0-dist/fonts/glyphicons-halflings-regular.eot">
+</link>
+<link
+	href="/bootstrap-3.2.0-dist/fonts/glyphicons-halflings-regular.svg"></link>
+<link
+	href="/bootstrap-3.2.0-dist/fonts/glyphicons-halflings-regular.ttf"></link>
+<link
+	href="/bootstrap-3.2.0-dist/fonts/glyphicons-halflings-regular.woff"></link>
+
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"
+	src="/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+
+				<h1>Test Result</h1>
+			</div>
+
+
+
+			<div class="panel-body">
+
+				<dl class="dl-horizontal">
+					<dt>Id</dt>
+					<dd th:text="${id}"></dd>
+
+					<dt>Total</dt>
+					<dd th:text="${totalMutants}"></dd>
+
+					<dt>Dead Mutants</dt>
+					<dd th:text="${deadMutantsQtd}"></dd>
+
+					<dt>Not Dead Mutants</dt>
+					<dd th:text="${notDeadMutantsQtd}"></dd>
+
+				</dl>
+
+				<h1>Dead Mutants</h1>
+
+				<table class="table table-striped">
+					<tr>
+						<th>Mutant key</th>
+						<th>Death Index</th>
+						<th>Eval Failed</th>
+					</tr>
+
+					<tr th:each="deadMutant : ${deadMutants}">
+						<td th:text="${deadMutant.mutantKey}"></td>
+						<td th:text="${deadMutant.deathIndex}"></td>
+						<td th:text="${deadMutant.evalFailed}"></td>
+					</tr>
+
+
+				</table>
+
+				<h1>Not Dead Mutants</h1>
+
+				<table class="table table-striped">
+					<tr>
+						<th>Mutant key</th>
+						<th>Death Index</th>
+						<th>Eval Failed</th>
+					</tr>
+
+					<tr th:each="notDeadMutant : ${notDeadMutants}">
+						<td th:text="${notDeadMutant.mutantKey}"></td>
+						<td th:text="${notDeadMutant.deathIndex}"></td>
+						<td th:text="${notDeadMutant.evalFailed}"></td>
+					</tr>
+
+
+				</table>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
