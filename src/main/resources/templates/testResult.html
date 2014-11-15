@@ -68,11 +68,10 @@
 				<h1>Test Result</h1>
 			</div>
 
-
-
 			<div class="panel-body">
-
-				<div class="container" style="float:left;width:40%;">
+				<div class="row">
+				
+					<div class="col-md-6">
 					<dl class="dl-horizontal">
 						<dt>Id</dt>
 						<dd th:text="${id}"></dd>
@@ -87,10 +86,27 @@
 						<dd th:text="${notDeadMutantsQtd}"></dd>
 	
 					</dl>
-				</div>
-				<div class="container" style="float:right;width:60%;">
-					<div id="chart_div"></div>
-				</div>
+					</div>
+
+					<div class="col-md-6">
+					<div id="chart_div" class="list-group"></div>
+					</div>
+					</div>
+
+		<h1>Dados do XML</h1>
+		
+		<table class="table table-striped">
+			<tr>
+				<th>Conjunto de Teste</th>
+				<th>Caso de Teste</th>
+				<th>Total de Dados de Teste</th>
+				<th>Operador de Mutacao</th>
+				<th>Mutante</th>
+				<th>Vivo?</th>
+			</tr>
+
+
+		</table>
 
 				<h1>Dead Mutants</h1>
 
