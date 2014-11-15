@@ -63,6 +63,12 @@ public class FileController {
 
 		return "banana";
 	}
+	
+	@RequestMapping("/xmlVisualization")
+	public String banana( ) {
+
+		return "xmlVisualization";
+	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public String provideUploadInfo() {
