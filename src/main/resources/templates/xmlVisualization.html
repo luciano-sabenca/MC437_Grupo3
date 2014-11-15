@@ -21,10 +21,9 @@
 <script type="text/javascript"
 	src="/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 
-
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script th:inline="javascript">
+    <script type="text/javascript">
 
       // Load the Visualization API and the piechart package.
       google.load('visualization', '1.0', {'packages':['corechart']});
@@ -42,8 +41,8 @@
         data.addColumn('string', 'Estado Mutante');
         data.addColumn('number', 'Contagem');
         data.addRows([
-          ['Vivo', /*[[${notDeadMutantsQtd}]]]*/,
-          ['Morto', /*[[${deadMutantsQtd}]]]*/]
+          ['Vivo', 3],
+          ['Morto', 1]
         ]);
 
         // Set chart options
@@ -61,40 +60,8 @@
 
 
 <body>
-	<div class="container">
-		<div class="panel panel-default">
-			<div class="panel-heading">
+	<div class="container" style="float:left;width:60%;">
 
-				<h1>Test Result</h1>
-			</div>
-
-			<div class="panel-body">
-				<div class="row">
-				
-					<div class="col-md-6">
-					<dl class="dl-horizontal">
-						<dt>Id</dt>
-						<dd th:text="${id}"></dd>
-	
-						<dt>Total</dt>
-						<dd th:text="${totalMutants}"></dd>
-	
-						<dt>Dead Mutants</dt>
-						<dd th:text="${deadMutantsQtd}"></dd>
-	
-						<dt>Not Dead Mutants</dt>
-						<dd th:text="${notDeadMutantsQtd}"></dd>
-	
-					</dl>
-					</div>
-
-					<div class="col-md-6">
-					<div id="chart_div" class="list-group"></div>
-					</div>
-					</div>
-
-		<h1>Dados do XML</h1>
-		
 		<table class="table table-striped">
 			<tr>
 				<th>Conjunto de Teste</th>
@@ -108,44 +75,11 @@
 
 		</table>
 
-				<h1>Dead Mutants</h1>
-
-				<table class="table table-striped">
-					<tr>
-						<th>Mutant key</th>
-						<th>Death Index</th>
-						<th>Eval Failed</th>
-					</tr>
-
-					<tr th:each="deadMutant : ${deadMutants}">
-						<td th:text="${deadMutant.mutantKey}"></td>
-						<td th:text="${deadMutant.deathIndex}"></td>
-						<td th:text="${deadMutant.evalFailed}"></td>
-					</tr>
-
-
-				</table>
-
-				<h1>Not Dead Mutants</h1>
-
-				<table class="table table-striped">
-					<tr>
-						<th>Mutant key</th>
-						<th>Death Index</th>
-						<th>Eval Failed</th>
-					</tr>
-
-					<tr th:each="notDeadMutant : ${notDeadMutants}">
-						<td th:text="${notDeadMutant.mutantKey}"></td>
-						<td th:text="${notDeadMutant.deathIndex}"></td>
-						<td th:text="${notDeadMutant.evalFailed}"></td>
-					</tr>
-
-
-				</table>
-
-			</div>
-		</div>
+	</div>
+	
+	<div class="container" style="float:right;width:40%;">
+		Grafico
+		<div id="chart_div"></div>
 	</div>
 </body>
 </html>
