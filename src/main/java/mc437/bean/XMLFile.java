@@ -3,6 +3,7 @@ package mc437.bean;
 import java.util.Date;
 
 public class XMLFile {
+	private Integer id;
 	private String nome;
 	private Long tamanho;
 	private Date dataEnvio;
@@ -39,6 +40,14 @@ public class XMLFile {
 
 	public void setDataEnvio(Date dataEnvio) {
 		this.dataEnvio = dataEnvio;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

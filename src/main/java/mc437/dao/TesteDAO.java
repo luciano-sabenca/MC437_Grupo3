@@ -22,17 +22,6 @@ public class TesteDAO {
 	@Autowired
 	DataSource datasource;
 
-	public void bla() {
-		if (datasource != null) {
-			System.out.println("Blablalba");
-			JdbcTemplate template = new JdbcTemplate(datasource);
-			System.out
-					.println(template
-							.queryForInt("SELECT id FROM Teste WHERE texto = 'banana'"));
-
-		}
-	}
-
 	public List<XMLFile> getFiles() {
 		JdbcTemplate template = new JdbcTemplate(datasource);
 		return template.query("SELECT * FROM I_Test_Result",
@@ -44,6 +33,7 @@ public class TesteDAO {
 						XMLFile xml = new XMLFile(rs.getString("file_name"), rs
 								.getLong("file_size"), new Date(rs
 								.getTimestamp("date").getTime()));
+						xml.setId(rs.getInt("id"));
 						return xml;
 					}
 

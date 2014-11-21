@@ -12,7 +12,7 @@ And desejo obter a quantidade de mutantes mortos 6
 					 
 
 Scenario:  Test Result eh invalido
-Given um test result nao existente
+Given um test result nao existente invalido
 When desejo obter informacoes sobre esse test result
 Then uma pagina de erro eh renderizada
 

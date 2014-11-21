@@ -1,8 +1,7 @@
 package stories;
 
-import org.jbehave.core.annotations.AfterScenario;
+import org.jbehave.core.annotations.AfterStories;
 import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Pending;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Assert;
@@ -13,7 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ResultaDosTestesSteps {
 
-	private WebDriver driver;
+	private WebDriver driver = new FirefoxDriver();
 
 	private String url;
 
@@ -24,7 +23,6 @@ public class ResultaDosTestesSteps {
 
 	@When("eu acesso a pagina que exibe informacoes do test result")
 	public void whenEuAcessoAPaginaQueExibeInformacoesDoTestResult() {
-		driver = new FirefoxDriver();
 		driver.get(url);
 	}
 
@@ -52,29 +50,29 @@ public class ResultaDosTestesSteps {
 		Assert.assertEquals(qtdMutantes, deadMutantes);
 	}
 
-	@AfterScenario
-	public void tearDown() {
-		driver.close();
-	}
-
-	@Given("um test result nao existente")
-	@Pending
-	public void givenUmTestResultNaoExistente() {
-		Assert.assertTrue(true);
+	@Given("um test result nao existente $naoExistenteId")
+	public void givenUmTestResultNaoExistente(String naoExistenteId) {
+		url = "http://localhost:8080/testResult/" + naoExistenteId;
 	}
 
 	@When("desejo obter informacoes sobre esse test result")
-	@Pending
 	public void whenDesejoObterInformacoesSobreEsseTestResult() {
 
-		Assert.assertTrue(true);
+		driver.get(url);
 	}
 
 	@Then("uma pagina de erro eh renderizada")
-	@Pending
 	public void thenUmaPaginaDeErroEhRenderizada() {
+		Assert.assertEquals("Não Encontrado", driver.getTitle());
+		WebElement element = driver.findElement(new By.ById("mensagemDeErro"));
 
-		Assert.assertTrue(true);
+		Assert.assertTrue(element.getText().contains("Não Encontrado"));
+
+	}
+
+	@AfterStories
+	public void tearDown() {
+		driver.close();
 	}
 
 }
