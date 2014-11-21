@@ -96,7 +96,7 @@
 
 		<h1>Dados do XML</h1>
 		
-		<table class="table table-striped" id="table1">
+		<table class="table table-striped">
 			<tr>
 				<th>Conjunto de Teste</th>
 				<th>Caso de Teste</th>
