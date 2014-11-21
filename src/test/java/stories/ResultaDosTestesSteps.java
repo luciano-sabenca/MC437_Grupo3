@@ -51,6 +51,13 @@ public class ResultaDosTestesSteps {
 		Long deadMutantes = Long.parseLong(element.getText());
 		Assert.assertEquals(qtdMutantes, deadMutantes);
 	}
+	
+	@Then("desejo carregar um grafico")
+	public void thenDesejoCarregarUmGrafico () {
+		WebElement element = driver.findElement(new By.ById("chart_div"));
+		Assert.assertNotNull(element);
+		Assert.assertNotNull(element.getText());
+	}
 
 	@AfterScenario
 	public void tearDown() {
