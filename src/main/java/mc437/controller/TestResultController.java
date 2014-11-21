@@ -38,7 +38,8 @@ public class TestResultController {
 
 		model.addAttribute("notDeadMutantsQtd", notDead.size());
 		model.addAttribute("notDeadMutants", notDead);
-
+		double score = (double) deadMutants.size() / total;
+		model.addAttribute("score", score);
 		model.addAttribute("id", id);
 		model.addAttribute("totalMutants", total);
 		model.addAttribute("deadMutantsQtd", deadMutants.size());

@@ -20,12 +20,13 @@
 <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript"
 	src="/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" language="javascript" src="TableFilter/tablefilter.js"></script> 
+<script type="text/javascript" language="javascript"
+	src="TableFilter/tablefilter.js"></script>
 
 
-    <!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script th:inline="javascript">
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script th:inline="javascript">
 
       // Load the Visualization API and the piechart package.
       google.load('visualization', '1.0', {'packages':['corechart']});
@@ -58,6 +59,7 @@
       }
     </script>
 
+<title th:text="|Test Result ${id}|"></title>
 </head>
 
 
@@ -71,43 +73,46 @@
 
 			<div class="panel-body">
 				<div class="row">
-				
-					<div class="col-md-6">
-					<dl class="dl-horizontal">
-						<dt>Id</dt>
-						<dd th:text="${id}"></dd>
-	
-						<dt>Total</dt>
-						<dd th:text="${totalMutants}"></dd>
-	
-						<dt>Dead Mutants</dt>
-						<dd th:text="${deadMutantsQtd}"></dd>
-	
-						<dt>Not Dead Mutants</dt>
-						<dd th:text="${notDeadMutantsQtd}"></dd>
-	
-					</dl>
-					</div>
 
 					<div class="col-md-6">
-					<div id="chart_div" class="list-group"></div>
+						<dl class="dl-horizontal">
+							<dt>Id</dt>
+							<dd th:text="${id}"></dd>
+
+							<dt>Score</dt>
+							<dd id="score" th:text="${#numbers.formatDecimal(score,1,4)}"></dd>
+
+							<dt>Total</dt>
+							<dd th:text="${totalMutants}"></dd>
+
+							<dt>Dead Mutants</dt>
+							<dd id="mutantesMortos" th:text="${deadMutantsQtd}"></dd>
+
+							<dt>Not Dead Mutants</dt>
+							<dd th:text="${notDeadMutantsQtd}"></dd>
+
+						</dl>
 					</div>
+
+					<div class="col-md-6">
+						<div id="chart_div" class="list-group"></div>
 					</div>
+				</div>
 
-		<h1>Dados do XML</h1>
-		
-		<table class="table table-striped" id="table1">
-			<tr>
-				<th>Conjunto de Teste</th>
-				<th>Caso de Teste</th>
-				<th>Total de Dados de Teste</th>
-				<th>Operador de Mutacao</th>
-				<th>Mutante</th>
-				<th>Vivo?</th>
-			</tr>
+				<h1>Dados do XML</h1>
+
+				<table class="table table-striped" id="table1">
+					<tr>
+						<th>Conjunto de Teste</th>
+						<th>Caso de Teste</th>
+						<th>Total de Dados de Teste</th>
+						<th>Operador de Mutacao</th>
+						<th>Mutante</th>
+						<th>Vivo?</th>
+					</tr>
 
 
-		</table>
+				</table>
 
 				<h1>Dead Mutants</h1>
 
@@ -126,11 +131,11 @@
 
 
 				</table>
-				
-			    <script language="javascript" type="text/javascript">  
+
+				<script language="javascript" type="text/javascript">  
     				var tf02 = new TF("table1",1);  
 					tf02.AddGrid();
-   				</script>   
+   				</script>
 
 				<h1>Not Dead Mutants</h1>
 
