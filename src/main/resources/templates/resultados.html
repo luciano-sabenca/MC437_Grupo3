@@ -28,35 +28,13 @@
 <body>
 	<div class="container">
 
-		<form method="POST" enctype="multipart/form-data" class="form-group"
-			action="/upload">
-			<div class="form-group">
-				<label for="file">File to Submit</label> <input id="btnUpload" class="form-control"
-					type="file" name="file"></input><br />
-			</div>
-			<div class="form-group">
-				<input id="btnSubmit" type="submit" class="btn btn-default" value="Upload"></input>
-				Press here to upload the file!
-			</div>
-		</form>
-
-
 		<table class="table table-striped">
 			<tr>
-				<th>Nome</th>
-				<th>Tamanho</th>
-				<th>Data</th>
-				<th>Resultados</th>
+				<th>Total de Dados de Teste (qtd testCaseResults)</th>
+				<th>Operador de Mutação (mutantKey - $CondTraConsAltCons$)</th>
+				<th>Mutante (mutantKey - $CondTraConsAltCons$0.mmap) </th>
+				<th>Vivo? (dead)</th> 
 			</tr>
-
-			<tr th:each="xmlFile : ${valores}">
-				<td th:text="${xmlFile.nome}"></td>
-				<td th:text="${xmlFile.tamanho}"></td>
-				<td th:text="${xmlFile.dataEnvio}"></td>
-				<td><a href="resultados.html">Resultados</a></td>
-			</tr>
-
-
 		</table>
 
 	</div>
