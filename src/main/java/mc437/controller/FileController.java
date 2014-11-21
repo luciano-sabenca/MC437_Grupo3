@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import dao.TestUploadXmlDAO;
+
 @Controller
 public class FileController {
 
@@ -83,7 +85,7 @@ public class FileController {
 			try {
 				byte[] bytes = file.getBytes();
 				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File("files/" + name
+						new FileOutputStream(new File(name
 								+ "-uploaded")));
 				stream.write(bytes);
 				stream.close();
