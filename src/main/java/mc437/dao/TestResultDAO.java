@@ -20,7 +20,7 @@ public class TestResultDAO {
 	public List<TestcaseExecutingOutput> getDeadTestCaseExecuting(
 			Integer iTestResult) {
 		return jdbcTemplate
-				.query("SELECT * FROM test_case_executing_output_mutantlist WHERE id_itr_test_set_results_case_results = ? AND dead = true",
+				.query("SELECT * FROM test_case_executing_output_mutantlist WHERE id_i_test_results = ? AND dead = true",
 						new Object[] { iTestResult },
 						new TestcaseExecutingOutputRowMapper());
 
@@ -29,11 +29,12 @@ public class TestResultDAO {
 	public List<TestcaseExecutingOutput> getNotDeadTestCaseExecuting(
 			Integer iTestResult) {
 		return jdbcTemplate
-				.query("SELECT * FROM test_case_executing_output_mutantlist WHERE id_itr_test_set_results_case_results = ? AND dead = false",
+				.query("SELECT * FROM test_case_executing_output_mutantlist WHERE id_i_test_results = ? AND dead = false",
 						new Object[] { iTestResult },
 						new TestcaseExecutingOutputRowMapper());
 
 	}
+	
 
 	private class TestcaseExecutingOutputRowMapper implements
 			RowMapper<TestcaseExecutingOutput> {
@@ -43,17 +44,17 @@ public class TestResultDAO {
 				throws SQLException {
 			TestcaseExecutingOutput testcaseExecutingOutput = new TestcaseExecutingOutput();
 			testcaseExecutingOutput.setCodSetResultsCaseResults(rs
-					.getInt("cod_set_results_case_results"));
+					.getInt("id_test_case_results"));
 			testcaseExecutingOutput.setDead(rs.getBoolean("dead"));
 			testcaseExecutingOutput.setDeathIndex(rs.getInt("death_index"));
 
 			testcaseExecutingOutput.setMutantKey(rs.getString("mutant_key"));
 			testcaseExecutingOutput.setEvalFailed(rs.getBoolean("eval_failed"));
 			testcaseExecutingOutput.setIdItrTestSetResultsCaseResults(rs
-					.getInt("id_itr_test_set_results_case_results"));
+					.getInt("id_test_set_results"));
 
 			testcaseExecutingOutput.setIdTestCaseRest(rs
-					.getInt("id_test_case_rests"));
+					.getInt("id_i_test_results"));
 
 			return testcaseExecutingOutput;
 

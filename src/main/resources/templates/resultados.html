@@ -28,37 +28,19 @@
 <body>
 	<div class="container">
 
-		<form method="POST" enctype="multipart/form-data" class="form-group"
-			action="/upload">
-			<div class="form-group">
-				<label for="file">File to Submit</label> <input id="btnUpload"
-					class="form-control" type="file" name="file"></input><br />
-			</div>
-			<div class="form-group">
-				<input id="btnSubmit" type="submit" class="btn btn-default"
-					value="Upload"></input> Press here to upload the file!
-			</div>
-		</form>
-
-
 		<table class="table table-striped">
 			<tr>
-				<th>Nome</th>
-				<th>Tamanho</th>
-				<th>Data</th>
-				<th>Resultados</th>
+				<th>Total de Dados de Teste</th>
+				<th>Operador de Mutação</th>
+				<th>Mutante</th>
+				<th>Vivo?</th> 
 			</tr>
-
-			<tr th:each="xmlFile : ${valores}">
-				<td><a th:text="${xmlFile.id}"
-					th:href="@{/testResult/{id}(id=${xmlFile.id})}"></a></td>
-				<td th:text="${xmlFile.nome}"></td>
-				<td th:text="${xmlFile.tamanho}"></td>
-				<td th:text="${xmlFile.dataEnvio}"></td>
-				<td><a href="resultados.html">Resultados</a></td>
+			<tr th:each="Results : ${valores}">
+				<td th:text="${Results.Operador_Mutante}"></td>
+				<td th:text="${Results.Operador_Mutante}"></td>
+				<td th:text="${Results.Mutante}"></td>
+				<td th:text="${Results.Dead}"></td>
 			</tr>
-
-
 		</table>
 
 	</div>

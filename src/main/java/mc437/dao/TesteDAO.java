@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 
 import mc437.bean.Teste;
 import mc437.bean.XMLFile;
+import mc437.bean.Results;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,17 +23,6 @@ public class TesteDAO {
 	@Autowired
 	DataSource datasource;
 
-	public void bla() {
-		if (datasource != null) {
-			System.out.println("Blablalba");
-			JdbcTemplate template = new JdbcTemplate(datasource);
-			System.out
-					.println(template
-							.queryForInt("SELECT id FROM Teste WHERE texto = 'banana'"));
-
-		}
-	}
-
 	public List<XMLFile> getFiles() {
 		JdbcTemplate template = new JdbcTemplate(datasource);
 		return template.query("SELECT * FROM I_Test_Result",
@@ -44,6 +34,7 @@ public class TesteDAO {
 						XMLFile xml = new XMLFile(rs.getString("file_name"), rs
 								.getLong("file_size"), new Date(rs
 								.getTimestamp("date").getTime()));
+						xml.setId(rs.getInt("id"));
 						return xml;
 					}
 
@@ -74,4 +65,22 @@ public class TesteDAO {
 
 		});
 	}
+	
+	public List<Results> getResults() {
+		JdbcTemplate template = new JdbcTemplate(datasource);
+		return template.query("SELECT mutant_key, dead FROM test_case_executing_output_mutantlist ml, "
+				+ "I_Test_Result i WHERE ml.id_i_test_results = i.id "
+				+ "AND i.file_name = 'funfa.xml'", 
+				new RowMapper<Results>() {
+
+					@Override
+					public Results mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						Results result = new Results(rs.getString("mutant_key"), rs.getString("mutant_key"), rs
+								.getInt("dead"));
+						return result;
+				}
+		});
+	}
+	
 }

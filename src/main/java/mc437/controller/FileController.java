@@ -8,6 +8,7 @@ import java.util.List;
 
 import mc437.bean.Teste;
 import mc437.bean.XMLFile;
+import mc437.bean.Results;
 import mc437.dao.TesteDAO;
 import mc437.service.TesteInterface;
 import mc437.service.XMLService;
@@ -19,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import dao.TestUploadXmlDAO;
 
 @Controller
 public class FileController {
@@ -34,20 +33,6 @@ public class FileController {
 	@Autowired
 	TesteDAO testeDAO;
 
-	@RequestMapping("/greeting")
-	public String greeting(
-			@RequestParam(value = "name", required = false, defaultValue = "World") String name,
-			Model model) {
-		model.addAttribute("name", name);
-		testeService.helloWorld();
-
-		for (Teste teste : testeDAO.getAllTests()) {
-			System.out.println(teste);
-		}
-		testeDAO.bla();
-		return "greeting";
-	}
-
 	@RequestMapping("/")
 	public String xml_files(Model model) {
 
@@ -56,6 +41,29 @@ public class FileController {
 		model.addAttribute("valores", testes);
 
 		return "index";
+
+	}
+	
+	@RequestMapping("/resultados")
+	public String results(Model model) {
+
+		List<Results> testes = testeDAO.getResults();
+		int n = testes.size();
+		String mutant;
+		String op_mutant_split[];
+//		String mutant_split[];
+		int i;
+	    for (i=0; i<n; i++) {
+	    	mutant = testes.get(i).getOperador_Mutante();
+	    	op_mutant_split = mutant.split("\\$");
+	    	mutant = "$" + op_mutant_split[1] + "$" + op_mutant_split[2];
+	    	testes.get(i).setOperador_Mutante(op_mutant_split[1]);	  
+	    	testes.get(i).setMutante(mutant);	    	
+	    }
+
+	    model.addAttribute("valores", testes);
+
+		return "resultados";
 		
 	}
 
@@ -69,9 +77,9 @@ public class FileController {
 
 		return "banana";
 	}
-	
+
 	@RequestMapping("/xmlVisualization")
-	public String banana( ) {
+	public String banana() {
 
 		return "xmlVisualization";
 	}
@@ -89,8 +97,7 @@ public class FileController {
 			try {
 				byte[] bytes = file.getBytes();
 				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File(name
-								+ "-uploaded")));
+						new FileOutputStream(new File(name + "-uploaded")));
 				stream.write(bytes);
 				stream.close();
 				XMLFile xmlFile = new XMLFile(file.getOriginalFilename(),
