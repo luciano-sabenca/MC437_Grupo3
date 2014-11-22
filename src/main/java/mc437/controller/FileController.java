@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import dao.TestUploadXmlDAO;
-
 @Controller
 public class FileController {
 
@@ -31,20 +29,6 @@ public class FileController {
 	@Autowired
 	TesteDAO testeDAO;
 
-	@RequestMapping("/greeting")
-	public String greeting(
-			@RequestParam(value = "name", required = false, defaultValue = "World") String name,
-			Model model) {
-		model.addAttribute("name", name);
-		testeService.helloWorld();
-
-		for (Teste teste : testeDAO.getAllTests()) {
-			System.out.println(teste);
-		}
-		testeDAO.bla();
-		return "greeting";
-	}
-
 	@RequestMapping("/")
 	public String xml_files(Model model) {
 
@@ -53,7 +37,7 @@ public class FileController {
 		model.addAttribute("valores", testes);
 
 		return "index";
-		
+
 	}
 	
 	@RequestMapping("/resultados")
@@ -89,9 +73,9 @@ public class FileController {
 
 		return "banana";
 	}
-	
+
 	@RequestMapping("/xmlVisualization")
-	public String banana( ) {
+	public String banana() {
 
 		return "xmlVisualization";
 	}
@@ -109,8 +93,7 @@ public class FileController {
 			try {
 				byte[] bytes = file.getBytes();
 				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File(name
-								+ "-uploaded")));
+						new FileOutputStream(new File(name + "-uploaded")));
 				stream.write(bytes);
 				stream.close();
 				XMLFile xmlFile = new XMLFile(file.getOriginalFilename(),
