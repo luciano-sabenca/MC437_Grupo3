@@ -30,10 +30,16 @@
 
 		<table class="table table-striped">
 			<tr>
-				<th>Total de Dados de Teste (qtd testCaseResults)</th>
-				<th>Operador de Mutação (mutantKey - $CondTraConsAltCons$)</th>
-				<th>Mutante (mutantKey - $CondTraConsAltCons$0.mmap) </th>
-				<th>Vivo? (dead)</th> 
+				<th>Total de Dados de Teste</th>
+				<th>Operador de Mutação</th>
+				<th>Mutante</th>
+				<th>Vivo?</th> 
+			</tr>
+			<tr th:each="Results : ${valores}">
+				<td th:text="${Results.Operador_Mutante}"></td>
+				<td th:text="${Results.Operador_Mutante}"></td>
+				<td th:text="${Results.Mutante}"></td>
+				<td th:text="${Results.Dead}"></td>
 			</tr>
 		</table>
 

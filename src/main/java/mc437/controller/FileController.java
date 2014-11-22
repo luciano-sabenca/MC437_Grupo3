@@ -8,6 +8,7 @@ import java.util.List;
 
 import mc437.bean.Teste;
 import mc437.bean.XMLFile;
+import mc437.bean.Results;
 import mc437.dao.TesteDAO;
 import mc437.service.TesteInterface;
 
@@ -52,6 +53,29 @@ public class FileController {
 		model.addAttribute("valores", testes);
 
 		return "index";
+		
+	}
+	
+	@RequestMapping("/resultados")
+	public String results(Model model) {
+
+		List<Results> testes = testeDAO.getResults();
+		int n = testes.size();
+		String mutant;
+		String op_mutant_split[];
+//		String mutant_split[];
+		int i;
+	    for (i=0; i<n; i++) {
+	    	mutant = testes.get(i).getOperador_Mutante();
+	    	op_mutant_split = mutant.split("\\$");
+	    	mutant = "$" + op_mutant_split[1] + "$" + op_mutant_split[2];
+	    	testes.get(i).setOperador_Mutante(op_mutant_split[1]);	  
+	    	testes.get(i).setMutante(mutant);	    	
+	    }
+
+	    model.addAttribute("valores", testes);
+
+		return "resultados";
 		
 	}
 
