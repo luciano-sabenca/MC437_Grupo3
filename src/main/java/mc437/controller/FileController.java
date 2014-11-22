@@ -10,6 +10,7 @@ import mc437.bean.Teste;
 import mc437.bean.XMLFile;
 import mc437.dao.TesteDAO;
 import mc437.service.TesteInterface;
+import mc437.service.XMLService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,10 @@ public class FileController {
 
 	@Autowired
 	TesteInterface testeService;
-
+	
+	@Autowired
+	XMLService xmlService;
+	
 	@Autowired
 	TesteDAO testeDAO;
 
@@ -93,6 +97,9 @@ public class FileController {
 						file.getSize(), new Date());
 
 				testeDAO.saveFile(xmlFile);
+				
+				xmlService.parserXml(name + "-uploaded", 25);
+				
 				return "fileUploaded";
 			} catch (Exception e) {
 				return "You failed to upload " + name + " => " + e.getMessage();

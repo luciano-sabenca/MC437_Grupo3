@@ -24,4 +24,26 @@ public class TestUploadXmlDAO extends TestBaseDAO{
 		
 		return exists == 1;
 	}
+	
+	public Boolean checkFileParsedTestSetResults(int idITestResult){
+		Integer exists = 0;
+		String sql = "SELECT 1 FROM test_set_results WHERE id_i_test_result = ?";
+		
+		jdbcTemplate = new JdbcTemplate(getConnectionDataSource());
+		exists = jdbcTemplate.queryForObject(sql, new Object[] {idITestResult}, Integer.class);
+		
+		return exists == 1;
+	}
+	
+	public Boolean checkFileParsedTestCaseResults(int idIdtrTestSetResults){
+		Integer exists = 0;
+		String sql = "SELECT 1 FROM test_case_results WHERE id_idtr_test_set_results = ?";
+		
+		jdbcTemplate = new JdbcTemplate(getConnectionDataSource());
+		exists = jdbcTemplate.queryForObject(sql, new Object[] {idIdtrTestSetResults}, Integer.class);
+		
+		return exists == 1;
+	}
+	
+	
 }
