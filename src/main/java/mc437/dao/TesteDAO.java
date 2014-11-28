@@ -9,7 +9,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import mc437.bean.Teste;
-import mc437.bean.XMLFile;
+import mc437.bean.ITestResultBean;
 import mc437.bean.Results;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +23,15 @@ public class TesteDAO {
 	@Autowired
 	DataSource datasource;
 
-	public List<XMLFile> getFiles() {
+	public List<ITestResultBean> getFiles() {
 		JdbcTemplate template = new JdbcTemplate(datasource);
 		return template.query("SELECT * FROM I_Test_Result",
-				new RowMapper<XMLFile>() {
+				new RowMapper<ITestResultBean>() {
 
 					@Override
-					public XMLFile mapRow(ResultSet rs, int rowNum)
+					public ITestResultBean mapRow(ResultSet rs, int rowNum)
 							throws SQLException {
-						XMLFile xml = new XMLFile(rs.getString("file_name"), rs
+						ITestResultBean xml = new ITestResultBean(rs.getString("file_name"), rs
 								.getLong("file_size"), new Date(rs
 								.getTimestamp("date").getTime()));
 						xml.setId(rs.getInt("id"));
@@ -41,13 +41,17 @@ public class TesteDAO {
 				});
 	}
 
-	public void saveFile(XMLFile file) {
+	public int saveFile(ITestResultBean file) {
+		String sql = "SELECT MAX(id) FROM I_Test_Result";
+		
 		JdbcTemplate template = new JdbcTemplate(datasource);
 		template.update(
 				"INSERT INTO I_Test_Result(date,file_size,file_name) VALUES (?, ?, ?)",
 				new Object[] { file.getDataEnvio(), file.getTamanho(),
 						file.getNome() }, new int[] { Types.DATE,
 						Types.INTEGER, Types.VARCHAR });
+		
+		return template.queryForObject(sql, new Object[] {}, Integer.class);
 	}
 
 	public List<Teste> getAllTests() {

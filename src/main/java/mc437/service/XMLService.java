@@ -1,9 +1,10 @@
 package mc437.service;
 
-import java.io.File;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
+import mc437.bean.ITestResultBean;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,20 +15,28 @@ public class XMLService implements XMLInterface{
 	@Autowired
 	TestSetResultsService testSetResults;
 	
-	public void parserXml(String pathXmlFile, int idItestResult){
+	@Autowired
+	ITestResultService iTestResultService;
+		
+	public void parserXml(ITestResultBean xmlFile){
 		
 		try{
-			File xmlFile = new File(pathXmlFile);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(xmlFile);
+			Document doc = dBuilder.parse(xmlFile.getXmlFile());
 			doc.getDocumentElement().normalize();
 		
-			testSetResults.parserXml(doc, idItestResult);
+			xmlFile.setListTestSetResults(testSetResults.parserXml(doc));
 			
+			this.save(xmlFile);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void save(ITestResultBean xmlFile){
+		iTestResultService.save(xmlFile);
+		testSetResults.save(xmlFile);
 	}
 }

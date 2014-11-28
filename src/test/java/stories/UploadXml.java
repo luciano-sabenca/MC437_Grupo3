@@ -37,6 +37,7 @@ public class UploadXml{
 	public void thenTheFileIsParsedInTheDataBase(){
 		Assert.assertTrue(testUploadXmlDAO.checkFileParsed(maxIdTestResult + 1));
 		Assert.assertTrue(testUploadXmlDAO.checkFileParsedTestSetResults(maxIdTestResult + 1));
+		//Assert.assertTrue(testUploadXmlDAO.checkFileParsedInImutants(maxIdTestResult + 1));
 		//Assert.assertTrue(testUploadXmlDAO.checkFileParsedTestCaseResults(maxIdTestResult + 1));
 	}
 }

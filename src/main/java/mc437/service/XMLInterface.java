@@ -1,8 +1,8 @@
 package mc437.service;
 
-import mc437.bean.XMLFile;
+import mc437.bean.ITestResultBean;
 
 public interface XMLInterface {
 
-	public void parserXml(String xmlFile, int idItestResult);
+	public void parserXml(ITestResultBean xmlFile);
 }

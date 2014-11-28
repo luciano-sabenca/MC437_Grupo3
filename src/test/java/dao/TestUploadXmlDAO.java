@@ -27,7 +27,7 @@ public class TestUploadXmlDAO extends TestBaseDAO{
 	
 	public Boolean checkFileParsedTestSetResults(int idITestResult){
 		Integer exists = 0;
-		String sql = "SELECT 1 FROM test_set_results WHERE id_i_test_result = ?";
+		String sql = "SELECT DISTINCT 1 FROM test_set_results WHERE id_i_test_result = ?";
 		
 		jdbcTemplate = new JdbcTemplate(getConnectionDataSource());
 		exists = jdbcTemplate.queryForObject(sql, new Object[] {idITestResult}, Integer.class);
@@ -45,5 +45,13 @@ public class TestUploadXmlDAO extends TestBaseDAO{
 		return exists == 1;
 	}
 	
-	
+	public Boolean checkFileParsedInImutants(int idItestResult){
+		Integer exists = 0;
+		String sql = "SELECT 1 FROM imutants WHERE id_iteste_result = ?";
+		
+		jdbcTemplate = new JdbcTemplate(getConnectionDataSource());
+		exists = jdbcTemplate.queryForObject(sql, new Object[] {idItestResult}, Integer.class);
+		
+		return exists == 1;
+	}	
 }

@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import mc437.bean.Teste;
-import mc437.bean.XMLFile;
+import mc437.bean.ITestResultBean;
 import mc437.bean.Results;
 import mc437.dao.TesteDAO;
 import mc437.service.TesteInterface;
@@ -36,7 +36,7 @@ public class FileController {
 	@RequestMapping("/")
 	public String xml_files(Model model) {
 
-		List<XMLFile> testes = testeDAO.getFiles();
+		List<ITestResultBean> testes = testeDAO.getFiles();
 
 		model.addAttribute("valores", testes);
 
@@ -100,12 +100,11 @@ public class FileController {
 						new FileOutputStream(new File(name + "-uploaded")));
 				stream.write(bytes);
 				stream.close();
-				XMLFile xmlFile = new XMLFile(file.getOriginalFilename(),
-						file.getSize(), new Date());
-
-				testeDAO.saveFile(xmlFile);
 				
-				xmlService.parserXml(name + "-uploaded", 25);
+				ITestResultBean xmlFile = new ITestResultBean(file.getOriginalFilename(),
+						          file.getSize(), new Date(), new File(name + "-uploaded"));
+
+				xmlService.parserXml(xmlFile);
 				
 				return "fileUploaded";
 			} catch (Exception e) {
