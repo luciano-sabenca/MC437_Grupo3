@@ -10,8 +10,8 @@ import mc437.bean.Teste;
 import mc437.bean.ITestResultBean;
 import mc437.bean.Results;
 import mc437.dao.TesteDAO;
-import mc437.service.TesteInterface;
 import mc437.service.XMLService;
+import mc437.service.Interface.TesteInterface;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,29 +44,6 @@ public class FileController {
 
 	}
 	
-	@RequestMapping("/resultados")
-	public String results(Model model) {
-
-		List<Results> testes = testeDAO.getResults();
-		int n = testes.size();
-		String mutant;
-		String op_mutant_split[];
-//		String mutant_split[];
-		int i;
-	    for (i=0; i<n; i++) {
-	    	mutant = testes.get(i).getOperador_Mutante();
-	    	op_mutant_split = mutant.split("\\$");
-	    	mutant = "$" + op_mutant_split[1] + "$" + op_mutant_split[2];
-	    	testes.get(i).setOperador_Mutante(op_mutant_split[1]);	  
-	    	testes.get(i).setMutante(mutant);	    	
-	    }
-
-	    model.addAttribute("valores", testes);
-
-		return "resultados";
-		
-	}
-
 	@RequestMapping("/banana")
 	public String banana(
 			@RequestParam(value = "name", required = false, defaultValue = "World") String name,

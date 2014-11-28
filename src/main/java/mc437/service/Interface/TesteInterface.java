@@ -1,4 +1,4 @@
-package mc437.service;
+package mc437.service.Interface;
 
 public interface TesteInterface {
 

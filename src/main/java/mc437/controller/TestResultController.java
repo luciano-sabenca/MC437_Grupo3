@@ -2,6 +2,7 @@ package mc437.controller;
 
 import java.util.List;
 
+import mc437.bean.Results;
 import mc437.bean.TestcaseExecutingOutput;
 import mc437.dao.TestResultDAO;
 
@@ -24,7 +25,28 @@ public class TestResultController {
 		List<TestcaseExecutingOutput> deadMutants = testResultDAO
 				.getDeadTestCaseExecuting(id);
 		List<TestcaseExecutingOutput> notDead = testResultDAO
-				.getNotDeadTestCaseExecuting(id);
+				.getNotDeadTestCaseExecuting(id);	
+		
+		List<Results> testes = testResultDAO.getResults(id);
+		int n = testes.size();
+		String mutant;
+		String op_mutant_split[];
+		int i;
+		int dead;
+	    for (i=0; i<n; i++) {
+	    	mutant = testes.get(i).getOperador_Mutante();
+	    	op_mutant_split = mutant.split("\\$");
+	    	mutant = "$" + op_mutant_split[1] + "$" + op_mutant_split[2];
+	    	testes.get(i).setOperador_Mutante(op_mutant_split[1]);	  
+	    	testes.get(i).setMutante(mutant);	  
+	    	dead = testes.get(i).getDead();
+	    	if (dead == 1) 
+	    		testes.get(i).setVivo("Sim");
+	    	else if (dead == 0)
+	    		testes.get(i).setVivo("Não");
+	    }
+	    
+	    model.addAttribute("valores", testes);
 
 		if (deadMutants.isEmpty() && notDead.isEmpty()) {
 			model.addAttribute("element", id);
@@ -43,4 +65,7 @@ public class TestResultController {
 		model.addAttribute("deadMutants", deadMutants);
 		return "testResult";
 	}
+	
+	
+	
 }
