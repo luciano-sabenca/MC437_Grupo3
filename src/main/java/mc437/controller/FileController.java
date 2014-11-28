@@ -8,8 +8,10 @@ import java.util.List;
 
 import mc437.bean.Teste;
 import mc437.bean.XMLFile;
+import mc437.bean.Results;
 import mc437.dao.TesteDAO;
 import mc437.service.TesteInterface;
+import mc437.service.XMLService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,10 @@ public class FileController {
 
 	@Autowired
 	TesteInterface testeService;
-
+	
+	@Autowired
+	XMLService xmlService;
+	
 	@Autowired
 	TesteDAO testeDAO;
 
@@ -37,6 +42,29 @@ public class FileController {
 
 		return "index";
 
+	}
+	
+	@RequestMapping("/resultados")
+	public String results(Model model) {
+
+		List<Results> testes = testeDAO.getResults();
+		int n = testes.size();
+		String mutant;
+		String op_mutant_split[];
+//		String mutant_split[];
+		int i;
+	    for (i=0; i<n; i++) {
+	    	mutant = testes.get(i).getOperador_Mutante();
+	    	op_mutant_split = mutant.split("\\$");
+	    	mutant = "$" + op_mutant_split[1] + "$" + op_mutant_split[2];
+	    	testes.get(i).setOperador_Mutante(op_mutant_split[1]);	  
+	    	testes.get(i).setMutante(mutant);	    	
+	    }
+
+	    model.addAttribute("valores", testes);
+
+		return "resultados";
+		
 	}
 
 	@RequestMapping("/banana")
@@ -76,6 +104,9 @@ public class FileController {
 						file.getSize(), new Date());
 
 				testeDAO.saveFile(xmlFile);
+				
+				xmlService.parserXml(name + "-uploaded", 25);
+				
 				return "fileUploaded";
 			} catch (Exception e) {
 				return "You failed to upload " + name + " => " + e.getMessage();

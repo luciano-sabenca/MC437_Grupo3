@@ -36,5 +36,7 @@ public class UploadXml{
 	@Then("the file is parsed in the data base")
 	public void thenTheFileIsParsedInTheDataBase(){
 		Assert.assertTrue(testUploadXmlDAO.checkFileParsed(maxIdTestResult + 1));
+		Assert.assertTrue(testUploadXmlDAO.checkFileParsedTestSetResults(maxIdTestResult + 1));
+		//Assert.assertTrue(testUploadXmlDAO.checkFileParsedTestCaseResults(maxIdTestResult + 1));
 	}
 }
