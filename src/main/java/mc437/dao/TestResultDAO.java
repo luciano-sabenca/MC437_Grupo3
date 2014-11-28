@@ -4,12 +4,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import mc437.bean.Results;
 import mc437.bean.TestcaseExecutingOutput;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
 
 @Repository
 public class TestResultDAO {
@@ -33,6 +36,24 @@ public class TestResultDAO {
 						new Object[] { iTestResult },
 						new TestcaseExecutingOutputRowMapper());
 
+	}
+	
+	public List<Results> getResults(Integer iTestResult) {
+		return jdbcTemplate.query("SELECT ml.mutant_key, ml.dead, s.path as conjunto, c.path as caso "
+				+ "FROM test_case_executing_output_mutantlist ml, I_Test_Result i, test_case_results c, "
+				+ "test_set_results s WHERE ml.id_i_test_results = i.id AND c.id_i_test_results = i.id "
+				+ "AND s.id_i_test_result = i.id AND i.id = ?;",
+				new Object[] { iTestResult },
+				new RowMapper<Results>() {
+
+					@Override
+					public Results mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						Results result = new Results(rs.getString("mutant_key"), rs.getString("mutant_key"), rs
+								.getInt("dead"), rs.getString("conjunto"), rs.getString("caso"));
+						return result;
+				}
+		});
 	}
 	
 

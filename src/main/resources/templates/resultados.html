@@ -30,16 +30,18 @@
 
 		<table class="table table-striped">
 			<tr>
-				<th>Total de Dados de Teste</th>
+				<th>Conjunto de Teste</th>
+				<th>Caso de Teste</th>
 				<th>Operador de Mutação</th>
 				<th>Mutante</th>
 				<th>Vivo?</th> 
 			</tr>
 			<tr th:each="Results : ${valores}">
-				<td th:text="${Results.Operador_Mutante}"></td>
+				<td th:text="${Results.Conjunto}"></td>
+				<td th:text="${Results.Caso}"></td>
 				<td th:text="${Results.Operador_Mutante}"></td>
 				<td th:text="${Results.Mutante}"></td>
-				<td th:text="${Results.Dead}"></td>
+				<td th:text="${Results.Vivo}"></td>
 			</tr>
 		</table>
 
