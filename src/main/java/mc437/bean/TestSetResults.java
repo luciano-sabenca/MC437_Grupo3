@@ -3,6 +3,7 @@ package mc437.bean;
 public class TestSetResults {
 
 	private String id;
+	private Integer idSeq;
 	private String cod;
 	private String path;
 	private int idItestResult;
@@ -12,6 +13,12 @@ public class TestSetResults {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public Integer getIdSeq() {
+		return idSeq;
+	}
+	public void setIdSeq(Integer idSeq) {
+		this.idSeq = idSeq;
 	}
 	public String getCod() {
 		return cod;

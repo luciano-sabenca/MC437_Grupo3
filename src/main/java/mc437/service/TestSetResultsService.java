@@ -3,8 +3,12 @@ package mc437.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import mc437.bean.ITestResultBean;
 import mc437.bean.TestSetResults;
+import mc437.dao.TestSetResultsDAO;
+import mc437.service.Interface.TestSetResultsInterface;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -16,8 +20,10 @@ import org.w3c.dom.Element;
 public class TestSetResultsService implements TestSetResultsInterface{
 
 	
-	@Override
-	public List<TestSetResults> parserXml(Document doc, int idItestResult) {
+	@Autowired
+	TestSetResultsDAO testSetResultsDAO;
+	
+	public List<TestSetResults> parserXml(Document doc) {
 		List<TestSetResults> listTestSetResults = new ArrayList<TestSetResults>();
 		
 		NodeList nList = doc.getElementsByTagName("testSetResults");
@@ -39,9 +45,10 @@ public class TestSetResultsService implements TestSetResultsInterface{
 		return listTestSetResults;
 	}
 	
-	@Override
-	public void save(List<TestSetResults> listTestSetResults){
-		
+	public void save(ITestResultBean iTestResultBean){
+		for (TestSetResults item : iTestResultBean.getListTestSetResults()) {
+			item.setIdSeq(testSetResultsDAO.save(item, iTestResultBean.getId()));
+		}
 	}
 
 }
