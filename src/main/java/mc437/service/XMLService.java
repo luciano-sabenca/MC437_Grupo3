@@ -15,7 +15,7 @@ public class XMLService implements XMLInterface{
 	
 	@Autowired
 	TestSetResultsService testSetResults;
-	
+		
 	@Autowired
 	ITestResultService iTestResultService;
 		
