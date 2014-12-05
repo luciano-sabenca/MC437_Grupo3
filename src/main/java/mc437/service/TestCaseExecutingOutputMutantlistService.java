@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mc437.bean.TestCaseExecutingOutputMutantlist;
+import mc437.dao.TestCaseExecutingOutputMutantlistDAO;
 import mc437.service.Interface.TestCaseExecutingOutputMutantlistInterface;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,6 +16,9 @@ import org.w3c.dom.NodeList;
 @Service
 public class TestCaseExecutingOutputMutantlistService implements TestCaseExecutingOutputMutantlistInterface{
 
+	@Autowired
+	TestCaseExecutingOutputMutantlistDAO testCaseExecutingOutputMutantlistDAO;
+	
 	public List<TestCaseExecutingOutputMutantlist> parserXml(NodeList listNodes) {
 		List<TestCaseExecutingOutputMutantlist> listTestCaseExecutingOutputMutantlists = new ArrayList<TestCaseExecutingOutputMutantlist>();
 			
@@ -36,9 +41,13 @@ public class TestCaseExecutingOutputMutantlistService implements TestCaseExecuti
 	}
 
 	@Override
-	public void save(
-			List<TestCaseExecutingOutputMutantlist> listTestCaseExecutingOutputMutantlists) {
-		// TODO Auto-generated method stub
+	public void save(List<TestCaseExecutingOutputMutantlist> listTestCaseExecutingOutputMutantlists, Integer idITestResults, Integer idTestSetResults, Integer idTestCaseResults) {
+		for (TestCaseExecutingOutputMutantlist item : listTestCaseExecutingOutputMutantlists) {
+			item.setIdITestResults(idITestResults);
+			item.setIdTestCaseResults(idTestCaseResults);
+			item.setIdTestSetResults(idTestSetResults);
+			item.setId_seq(testCaseExecutingOutputMutantlistDAO.save(item));
+		}
 		
 	}
 	

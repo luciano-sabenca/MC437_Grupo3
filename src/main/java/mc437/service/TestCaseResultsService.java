@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mc437.bean.TestCaseResults;
+import mc437.dao.TestCaseResultsDAO;
 import mc437.service.Interface.TestCaseResultsInterface;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class TestCaseResultsService implements TestCaseResultsInterface{
 	@Autowired
 	TestCaseExecutingOutputMutantlistService testCaseExecutingOutputMutantlist;
 	
+	@Autowired
+	TestCaseResultsDAO testCaseResultsDAO;
+	
 	public List<TestCaseResults> parserXml(NodeList listNodes) {
 		List<TestCaseResults> listTestCaseResults = new ArrayList<TestCaseResults>();
 		
@@ -28,8 +32,7 @@ public class TestCaseResultsService implements TestCaseResultsInterface{
 				Element eElement = (Element) listNodes.item(i);
 				testCaseResults.setPath(eElement.getElementsByTagName("path").item(0).getTextContent());
 				testCaseResults.setTestCaseKey(eElement.getElementsByTagName("_testCaseKey").item(0).getTextContent());
-				testCaseResults.setListtestCaseExecutingOutputMutantlists(
-									testCaseExecutingOutputMutantlist.parserXml(eElement.getElementsByTagName("testCaseExecutingOutput_MutantList")));
+				testCaseResults.setListtestCaseExecutingOutputMutantlists(testCaseExecutingOutputMutantlist.parserXml(eElement.getElementsByTagName("testCaseExecutingOutput_MutantList")));
 				listTestCaseResults.add(testCaseResults);
 			}
 		}
@@ -38,9 +41,14 @@ public class TestCaseResultsService implements TestCaseResultsInterface{
 	}
 
 	@Override
-	public void save(List<TestCaseResults> listTestCaseResults) {
-		// TODO Auto-generated method stub
-		
+	public void save(List<TestCaseResults> listTestCaseResults, Integer idITestResults, Integer idTestSetResults) {
+		for (TestCaseResults item : listTestCaseResults) {
+			item.setIdITestResults(idITestResults);
+			item.setIdTestSetResults(idTestSetResults);
+			item.setIdSeq(testCaseResultsDAO.save(item));
+			
+			testCaseExecutingOutputMutantlist.save(item.getListtestCaseExecutingOutputMutantlists(), idITestResults, idTestSetResults, item.getIdSeq());
+		}		
 	}
 	
 	

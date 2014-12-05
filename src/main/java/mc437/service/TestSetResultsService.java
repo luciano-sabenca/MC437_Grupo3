@@ -15,7 +15,6 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
-
 @Service
 public class TestSetResultsService implements TestSetResultsInterface{
 
@@ -46,23 +45,16 @@ public class TestSetResultsService implements TestSetResultsInterface{
 				for(int j = 0; j < listTestCaseResults.getLength(); j++){
 					testSetResults.setListTestCaseResults(testCaseResults.parserXml(listTestCaseResults));
 				}
-				
-				
-				//testSetResults.setListTestCaseResults(testCaseResults.parserXml(eElement.getElementsByTagName("testCaseResults")
-						//, testSetResults.getIdItestResult()));
 			}
 		}
-		
-		
-		
-
-		
 		return listTestSetResults;
 	}
 	
 	public void save(ITestResultBean iTestResultBean){
 		for (TestSetResults item : iTestResultBean.getListTestSetResults()) {
-			item.setIdSeq(testSetResultsDAO.save(item, iTestResultBean.getId()));
+			item.setIdItestResult(iTestResultBean.getId());
+			item.setIdSeq(testSetResultsDAO.save(item));
+			testCaseResults.save(item.getListTestCaseResults(),iTestResultBean.getId(), item.getIdSeq());
 		}
 	}
 
