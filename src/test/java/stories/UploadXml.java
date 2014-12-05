@@ -19,7 +19,7 @@ public class UploadXml{
 	@Given("the chosen XML file")
 	public void givenTheChosenXMLFile(){
 		driver = new FirefoxDriver();
-		driver.get("http://localhost:8080");
+		driver.get("http://localhost:8081");
 		
 		WebElement element = driver.findElement(By.id("btnUpload"));
 		element.sendKeys("/home/cc2012/ra136576/MC437/" + fileName);
