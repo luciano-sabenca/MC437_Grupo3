@@ -24,8 +24,18 @@ public class IModelsDAO {
 	}
 
 	public void save(IModels iModels) {
-		// TODO
-
+		jdbcTemplate
+				.update("INSERT INTO imodels(initial_state,"
+						+ "id_seq,is_mutante, build_flag, context_id, conv_flag,"
+						+ "ignore_errors,name, path, id_i_test_result) VALUES (?,"
+						+ "?, ?, ?, ?, ?, ?, ?, ?, ?)",
+						new Object[] { iModels.getInitialState(),
+								iModels.getIdSeq(), iModels.getIsMutante(),
+								iModels.getBuildFlag(), iModels.getContextId(),
+								iModels.getConvFlag(),
+								iModels.getIgnoreErrors(), iModels.getName(),
+								iModels.getPath(), iModels.getIdITestResult() });
+		
 	}
 
 	private class IModelsRowMapper implements RowMapper<IModels> {
