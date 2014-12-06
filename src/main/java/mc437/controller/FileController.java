@@ -6,9 +6,7 @@ import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
 
-import mc437.bean.Teste;
 import mc437.bean.ITestResultBean;
-import mc437.bean.Results;
 import mc437.dao.TesteDAO;
 import mc437.service.XMLService;
 import mc437.service.Interface.TesteInterface;
