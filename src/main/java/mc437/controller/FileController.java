@@ -91,8 +91,9 @@ public class FileController {
 				return "error";
 			}
 		} else {
-			return "You failed to upload " + name
-					+ " because the file was empty.";
+			model.addAttribute("element", "You failed to Upload " + name
+					+ "-> " + " because the file was empty.");
+			return "error";
 		}
 	}
 }
