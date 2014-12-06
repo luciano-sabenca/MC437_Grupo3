@@ -2,6 +2,7 @@ package stories;
 
 import java.util.List;
 
+import org.jbehave.core.annotations.AfterStories;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -32,8 +33,13 @@ public class ConsultaDeResultadosSteps {
 
 	@Then("a página com os resultados é exibida.")
 	public void thenAPáginaComOsResultadosÉExibida() {
-		Assert.assertEquals("http://localhost:8080/testResults/1",
+		Assert.assertEquals("http://localhost:8080/testResult/1",
 				webDriver.getCurrentUrl());
-		
+
+	}
+
+	@AfterStories
+	public void tearDown() {
+		webDriver.close();
 	}
 }

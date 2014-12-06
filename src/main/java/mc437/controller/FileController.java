@@ -24,10 +24,10 @@ public class FileController {
 
 	@Autowired
 	TesteInterface testeService;
-	
+
 	@Autowired
 	XMLService xmlService;
-	
+
 	@Autowired
 	TesteDAO testeDAO;
 
@@ -41,7 +41,7 @@ public class FileController {
 		return "index";
 
 	}
-	
+
 	@RequestMapping("/banana")
 	public String banana(
 			@RequestParam(value = "name", required = false, defaultValue = "World") String name,
@@ -65,25 +65,30 @@ public class FileController {
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String handleFileUpload(@RequestParam("file") MultipartFile file) {
+	public String handleFileUpload(Model model,
+			@RequestParam("file") MultipartFile file) {
 		String name = file.getOriginalFilename();
 
 		if (!file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
 				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File(name + "-uploaded")));
+						new FileOutputStream(new File(name + "-uploaded.xml")));
 				stream.write(bytes);
 				stream.close();
-				
-				ITestResultBean xmlFile = new ITestResultBean(file.getOriginalFilename(),
-						          file.getSize(), new Date(), new File(name + "-uploaded"));
+
+				ITestResultBean xmlFile = new ITestResultBean(
+						file.getOriginalFilename(), file.getSize(), new Date(),
+						new File(name + "-uploaded.xml"));
 
 				xmlService.parserXml(xmlFile);
-				
+
 				return "fileUploaded";
 			} catch (Exception e) {
-				return "You failed to upload " + name + " => " + e.getMessage();
+				System.out.println("Aqui");
+				model.addAttribute("element", "You failed to Upload " + name
+						+ "-> " + e.getMessage());
+				return "error";
 			}
 		} else {
 			return "You failed to upload " + name

@@ -21,7 +21,7 @@
 <script type="text/javascript"
 	src="/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" language="javascript"
-	src="TableFilter/tablefilter.js"></script>
+	src="/TableFilter/tablefilter.js"></script>
 
 
 <!--Load the AJAX API-->
@@ -110,11 +110,11 @@
 						<th>Vivo?</th>
 					</tr>
 					<tr th:each="Results : ${valores}">
-						<td th:text="${Results.Conjunto}"></td>
-						<td th:text="${Results.Caso}"></td>
-						<td th:text="${Results.Operador_Mutante}"></td>
-						<td th:text="${Results.Mutante}"></td>
-						<td th:text="${Results.Vivo}"></td>
+						<td id="conjunto" th:text="${Results.Conjunto}"></td>
+						<td id="caso" th:text="${Results.Caso}"></td>
+						<td id="operador" th:text="${Results.Operador_Mutante}"></td>
+						<td id="mutante" th:text="${Results.Mutante}"></td>
+						<td id="vivo" th:text="${Results.Vivo}"></td>
 					</tr>
 
 

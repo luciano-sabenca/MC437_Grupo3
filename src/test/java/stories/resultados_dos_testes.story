@@ -7,8 +7,8 @@ Scenario:  Test Result eh valido
 Given um test result valido 1
 When eu acesso a pagina que exibe informacoes do test result
 Then desejo obter os dados do result 1
-And desejo obter o score 0.75
-And desejo obter a quantidade de mutantes mortos 6
+And desejo obter o score 1
+And desejo obter a quantidade de mutantes mortos 1
 					 
 
 Scenario:  Test Result eh invalido

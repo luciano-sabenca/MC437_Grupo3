@@ -1,5 +1,7 @@
 package mc437.bean;
 
+import java.util.List;
+
 public class TestSetResults {
 
 	private String id;
@@ -7,6 +9,7 @@ public class TestSetResults {
 	private String cod;
 	private String path;
 	private int idItestResult;
+	private List<TestCaseResults> listTestCaseResults;
 
 	public String getId() {
 		return id;
@@ -37,6 +40,12 @@ public class TestSetResults {
 	}
 	public void setIdItestResult(int idItestResult) {
 		this.idItestResult = idItestResult;
+	}
+	public List<TestCaseResults> getListTestCaseResults() {
+		return listTestCaseResults;
+	}
+	public void setListTestCaseResults(List<TestCaseResults> listTestCaseResults) {
+		this.listTestCaseResults = listTestCaseResults;
 	}
 	
 	

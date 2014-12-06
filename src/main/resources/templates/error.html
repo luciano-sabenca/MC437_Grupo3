@@ -32,7 +32,7 @@
 	<div class="container">
 
 		<div class="alert alert-danger" id="mensagemDeErro"
-			th:if="${element != null}" th:text="|Não Encontrado ${element}|"></div>
+			th:if="${element != null}" th:text="|${element}|"></div>
 
 		<div class="alert alert-danger" id="mensagemDeErro"
 			th:if="${element == null}" th:text="|Não Encontrado Elemento|"></div>
