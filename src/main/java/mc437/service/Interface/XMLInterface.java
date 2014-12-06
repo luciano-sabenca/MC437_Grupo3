@@ -4,5 +4,5 @@ import mc437.bean.ITestResultBean;
 
 public interface XMLInterface {
 
-	public void parserXml(ITestResultBean xmlFile);
+	public void parserXml(ITestResultBean xmlFile) throws Exception;
 }
