@@ -11,7 +11,7 @@ import dao.TestUploadXmlDAO;
 public class UploadXml{
 	
 	private WebDriver driver;
-	private String fileName = "resultados.xml";
+	private String fileName = "resultados_9.xml";
 	private int maxIdTestResult;
 	
 	TestUploadXmlDAO testUploadXmlDAO;
@@ -22,7 +22,7 @@ public class UploadXml{
 		driver.get("http://localhost:8081");
 		
 		WebElement element = driver.findElement(By.id("btnUpload"));
-		element.sendKeys("/home/cc2012/ra136576/MC437/" + fileName);
+		element.sendKeys("/home/cc2012/ra138466/Downloads/" + fileName);
 	}
 	
 	@When("a click on the sumit bottom")
@@ -37,7 +37,7 @@ public class UploadXml{
 	public void thenTheFileIsParsedInTheDataBase(){
 		Assert.assertTrue(testUploadXmlDAO.checkFileParsed(maxIdTestResult + 1));
 		Assert.assertTrue(testUploadXmlDAO.checkFileParsedTestSetResults(maxIdTestResult + 1));
-		//Assert.assertTrue(testUploadXmlDAO.checkFileParsedInImutants(maxIdTestResult + 1));
-		//Assert.assertTrue(testUploadXmlDAO.checkFileParsedTestCaseResults(maxIdTestResult + 1));
+		Assert.assertTrue(testUploadXmlDAO.checkFileParsedTestCaseResults(maxIdTestResult + 1));
+		Assert.assertTrue(testUploadXmlDAO.checkFileParsedTestCaseExecutingOutputMutantList(maxIdTestResult + 1));
 	}
 }
