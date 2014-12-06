@@ -18,7 +18,7 @@ public class ResultaDosTestesSteps {
 
 	@Given("um test result valido $id")
 	public void givenUmTestResultValido(String id) {
-		url = "http://localhost:8080/testResult/" + id;
+		url = "http://localhost:8081/testResult/" + id;
 	}
 
 	@When("eu acesso a pagina que exibe informacoes do test result")
