@@ -11,6 +11,7 @@ public class ITestResultBean {
 	private Date dataEnvio;
 	private File xmlFile;
 	private List<TestSetResults> listTestSetResults;
+	private List<IMutants> listIMutants;
 
 	public List<TestSetResults> getListTestSetResults() {
 		return listTestSetResults;
@@ -75,6 +76,14 @@ public class ITestResultBean {
 	
 	public void setXmlFile(File xmlFile) {
 		this.xmlFile = xmlFile;
+	}
+
+	public List<IMutants> getListIMutants() {
+		return listIMutants;
+	}
+
+	public void setListIMutants(List<IMutants> listIMutants) {
+		this.listIMutants = listIMutants;
 	}
 
 }

@@ -35,19 +35,29 @@ public class TestUploadXmlDAO extends TestBaseDAO{
 		return exists == 1;
 	}
 	
-	public Boolean checkFileParsedTestCaseResults(int idIdtrTestSetResults){
+	public Boolean checkFileParsedTestCaseResults(int idITestResult){
 		Integer exists = 0;
-		String sql = "SELECT 1 FROM test_case_results WHERE id_idtr_test_set_results = ?";
+		String sql = "SELECT DISTINCT 1 FROM test_case_results WHERE  id_i_test_results = ?";
 		
 		jdbcTemplate = new JdbcTemplate(getConnectionDataSource());
-		exists = jdbcTemplate.queryForObject(sql, new Object[] {idIdtrTestSetResults}, Integer.class);
+		exists = jdbcTemplate.queryForObject(sql, new Object[] {idITestResult}, Integer.class);
+		
+		return exists == 1;
+	}
+	
+	public Boolean checkFileParsedTestCaseExecutingOutputMutantList(int idITestResult){
+		Integer exists = 0;
+		String sql = "SELECT DISTINCT 1 FROM test_case_executing_output_mutantlist WHERE  id_i_test_results = ?";
+		
+		jdbcTemplate = new JdbcTemplate(getConnectionDataSource());
+		exists = jdbcTemplate.queryForObject(sql, new Object[] {idITestResult}, Integer.class);
 		
 		return exists == 1;
 	}
 	
 	public Boolean checkFileParsedInImutants(int idItestResult){
 		Integer exists = 0;
-		String sql = "SELECT 1 FROM imutants WHERE id_iteste_result = ?";
+		String sql = "SELECT DISTINCT 1 FROM imutants WHERE id_iteste_result = ?";
 		
 		jdbcTemplate = new JdbcTemplate(getConnectionDataSource());
 		exists = jdbcTemplate.queryForObject(sql, new Object[] {idItestResult}, Integer.class);

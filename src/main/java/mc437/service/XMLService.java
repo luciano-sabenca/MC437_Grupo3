@@ -17,6 +17,9 @@ public class XMLService implements XMLInterface {
 	TestSetResultsService testSetResults;
 
 	@Autowired
+	IMutantsService iMutantsService;
+	
+	@Autowired
 	ITestResultService iTestResultService;
 
 	public void parserXml(ITestResultBean xmlFile) throws Exception {
@@ -29,7 +32,8 @@ public class XMLService implements XMLInterface {
 			doc.getDocumentElement().normalize();
 
 			xmlFile.setListTestSetResults(testSetResults.parserXml(doc));
-
+			xmlFile.setListIMutants(iMutantsService.parserXml(doc));
+			
 			this.save(xmlFile);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,5 +45,6 @@ public class XMLService implements XMLInterface {
 	public void save(ITestResultBean xmlFile) {
 		iTestResultService.save(xmlFile);
 		testSetResults.save(xmlFile);
+		iMutantsService.save(xmlFile);
 	}
 }

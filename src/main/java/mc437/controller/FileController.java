@@ -86,13 +86,14 @@ public class FileController {
 				return "fileUploaded";
 			} catch (Exception e) {
 				System.out.println("Aqui");
-				model.addAttribute("element", "You failed to Upload" + name
+				model.addAttribute("element", "You failed to Upload " + name
 						+ "-> " + e.getMessage());
 				return "error";
 			}
 		} else {
-			return "You failed to upload " + name
-					+ " because the file was empty.";
+			model.addAttribute("element", "You failed to Upload " + name
+					+ "-> " + " because the file was empty.");
+			return "error";
 		}
 	}
 }

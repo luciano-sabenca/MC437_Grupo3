@@ -9,3 +9,8 @@ Scenario:  1
 Given the chosen XML file
 When a click on the sumit bottom
 Then the file is parsed in the data base
+
+Scenario:  2
+Given a invalid XML
+When a click on the sumit bottom
+Then the error page must be showed
