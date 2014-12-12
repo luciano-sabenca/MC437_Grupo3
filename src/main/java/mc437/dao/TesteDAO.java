@@ -30,7 +30,8 @@ public class TesteDAO {
 					@Override
 					public ITestResultBean mapRow(ResultSet rs, int rowNum)
 							throws SQLException {
-						ITestResultBean xml = new ITestResultBean(rs.getString("file_name"), rs
+						ITestResultBean xml = new ITestResultBean(rs
+								.getString("file_name"), rs
 								.getLong("file_size"), new Date(rs
 								.getTimestamp("date").getTime()));
 						xml.setId(rs.getInt("id"));
@@ -42,14 +43,14 @@ public class TesteDAO {
 
 	public int saveFile(ITestResultBean file) {
 		String sql = "SELECT MAX(id) FROM I_Test_Result";
-		
+
 		JdbcTemplate template = new JdbcTemplate(datasource);
 		template.update(
 				"INSERT INTO I_Test_Result(date,file_size,file_name) VALUES (?, ?, ?)",
 				new Object[] { file.getDataEnvio(), file.getTamanho(),
-						file.getNome() }, new int[] { Types.DATE,
+						file.getNome() }, new int[] { Types.TIMESTAMP,
 						Types.INTEGER, Types.VARCHAR });
-		
+
 		return template.queryForObject(sql, new Object[] {}, Integer.class);
 	}
 
@@ -68,7 +69,5 @@ public class TesteDAO {
 
 		});
 	}
-	
-	
-	
+
 }
