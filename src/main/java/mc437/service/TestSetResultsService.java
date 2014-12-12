@@ -2,8 +2,6 @@ package mc437.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import mc437.bean.ITestResultBean;
 import mc437.bean.TestCaseResults;
@@ -14,9 +12,9 @@ import mc437.service.Interface.TestSetResultsInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 @Service
 public class TestSetResultsService implements TestSetResultsInterface {
@@ -26,8 +24,6 @@ public class TestSetResultsService implements TestSetResultsInterface {
 
 	@Autowired
 	TestSetResultsDAO testSetResultsDAO;
-
-	ExecutorService executorService = Executors.newFixedThreadPool(10);
 
 	public List<TestSetResults> parserXml(Document doc) {
 		List<TestSetResults> listTestSetResults = new ArrayList<TestSetResults>();
@@ -64,16 +60,12 @@ public class TestSetResultsService implements TestSetResultsInterface {
 	public void save(final ITestResultBean iTestResultBean) {
 		for (final TestSetResults item : iTestResultBean
 				.getListTestSetResults()) {
-			executorService.submit(new Runnable() {
 
-				@Override
-				public void run() {
-					item.setIdItestResult(iTestResultBean.getId());
-					item.setIdSeq(testSetResultsDAO.save(item));
-					testCaseResults.save(item.getListTestCaseResults(),
-							iTestResultBean.getId(), item.getIdSeq());
-				}
-			});
+			item.setIdItestResult(iTestResultBean.getId());
+			item.setIdSeq(testSetResultsDAO.save(item));
+			testCaseResults.save(item.getListTestCaseResults(),
+					iTestResultBean.getId(), item.getIdSeq());
+
 		}
 	}
 }
